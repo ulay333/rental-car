@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #28a745;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Terima Kasih!</h1>
+        <p id="confirmation"></p>
+        <p>Tunggu chat WhatsApp dari kami.</p>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const car = params.get('car');
+        const duration = params.get('duration');
+        const price = params.get('price');
+        const name = params.get('name');
+
+        const confirmation = document.getElementById('confirmation');
+        confirmation.innerHTML = `Terima kasih <strong>${name}</strong> telah memilih mobil <strong>${car.toUpperCase()}</strong> 
+                                  untuk durasi <strong>${duration} jam</strong> dengan total harga <strong>Rp ${Number(price).toLocaleString()}</strong>.`;
+    </script>
+</body>
+</html>

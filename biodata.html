@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengisian Biodata</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .details {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pengisian Biodata</h1>
+        <div class="details" id="details"></div>
+        <form onsubmit="submitBiodata(event)">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+
+            <label for="phone">Nomor HP:</label>
+            <input type="text" id="phone" placeholder="Masukkan nomor HP Anda" required>
+
+            <label for="address">Alamat:</label>
+            <input type="text" id="address" placeholder="Masukkan alamat Anda" required>
+
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+
+    <script>
+        // Harga berdasarkan mobil dan durasi (sesuai index.html)
+        const prices = {
+            brio: { 6: 100000, 12: 150000, 24: 200000 },
+            jazz: { 6: 125000, 12: 170000, 24: 225000 },
+            avanza: { 6: 150000, 12: 200000, 24: 260000 },
+            xenia: { 6: 150000, 12: 200000, 24: 260000 }
+        };
+
+        // Ambil data dari query string
+        const params = new URLSearchParams(window.location.search);
+        const car = params.get('car');
+        const duration = params.get('duration');
+        const price = prices[car][duration];
+
+        // Tampilkan detail mobil, durasi, dan harga
+        const detailsDiv = document.getElementById('details');
+        detailsDiv.innerHTML = `<p><strong>Mobil:</strong> ${car.toUpperCase()}</p>
+                                <p><strong>Durasi Sewa:</strong> ${duration} Jam</p>
+                                <p><strong>Total Harga:</strong> Rp ${price.toLocaleString()}</p>`;
+
+        // Fungsi pengiriman biodata
+        function submitBiodata(event) {
+            event.preventDefault(); // Mencegah refresh halaman
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+
+            // Redirect ke halaman konfirmasi
+            window.location.href = `konfirmasi.html?car=${car}&duration=${duration}&price=${price}&name=${name}`;
+        }
+    </script>
+</body>
+</html>
